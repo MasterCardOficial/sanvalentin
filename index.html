@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para ti, Marianita</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ====== PASO 0: PANTALLA DE CARGA ====== -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-heart">&#128149;</div>
+            <div class="loading-bar">
+                <div class="loading-progress" id="loading-progress"></div>
+                <div class="loading-percentage" id="loading-percentage">0%</div>
+            </div>
+            <p class="loading-message" id="loading-message">Preparando algo especial...</p>
+            <div class="loading-timer" id="loading-timer"></div>
+        </div>
+    </div>
+
+    <!-- ====== PASO 1: PANTALLA DE INTRO (CARTA CON CANDADO) ====== -->
+    <div id="intro-screen" class="hidden">
+        <div class="intro-bg-hearts" id="intro-bg-hearts"></div>
+        <div class="intro-content">
+            <div class="locked-letter" id="locked-letter">
+                <div class="letter-card">
+                    <div class="letter-shine"></div>
+                    <div class="lock-icon" id="lock-icon">&#128274;</div>
+                    <div class="letter-heart">&#128140;</div>
+                </div>
+                <div class="key-icon" id="key-icon">&#128273;</div>
+            </div>
+            <p class="click-text">Tienes una carta especial...</p>
+            <p class="click-subtext">toca para usar tu llave</p>
+        </div>
+    </div>
+
+    <!-- ====== PASO 2: DIALOGO ESCALONADO ====== -->
+    <div id="confirm-overlay" class="hidden">
+        <div class="confirm-box" id="confirm-box">
+            <p class="confirm-text" id="confirm-text"></p>
+            <div class="confirm-buttons">
+                <button class="confirm-btn confirm-yes" id="confirm-yes">Si</button>
+                <button class="confirm-btn confirm-no" id="confirm-no">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== CONTENIDO PRINCIPAL ====== -->
+    <div id="main-content" class="hidden">
+        <canvas id="particles-canvas"></canvas>
+        <div id="floating-hearts"></div>
+        <div id="petals-container"></div>
+        <div id="shooting-stars"></div>
+        <div id="light-bubbles"></div>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-sparkles" id="hero-sparkles"></div>
+                <p class="hero-pretext fade-in-up">14 de febrero</p>
+                <h1 class="title-glow">Hola, Marianita</h1>
+                <div class="heart-divider">
+                    <span class="heart-left">~</span>
+                    <span class="heart-center">&#9829;</span>
+                    <span class="heart-right">~</span>
+                </div>
+                <p class="subtitle typewriter" id="typewriter"></p>
+                <div class="scroll-indicator fade-in-up" style="--delay: 2.5s">
+                    <div class="scroll-arrow"></div>
+                    <p>Desliza</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADVERTENCIA -->
+        <section class="warning-section" id="warning-section">
+            <div class="warning-card glass-card fade-in-up">
+                <div class="warning-icon">&#9888;&#65039;</div>
+                <p class="warning-text">Lo que viene a continuacion<br>lo abres bajo tu propia responsabilidad</p>
+                <div class="warning-line"></div>
+                <p class="warning-sub">No digas que no te avise...</p>
+            </div>
+        </section>
+
+        <!-- CARTA -->
+        <section class="letter-section" id="letter-section">
+            <div class="letter-envelope-bg">
+                <div class="letter-paper glass-card fade-in-up">
+                    <div class="letter-header">
+                        <div class="letter-stamp">14 FEB</div>
+                        <div class="letter-rose">&#127801;</div>
+                    </div>
+                    <div class="letter-body">
+                        <p class="letter-greeting">Marianita,</p>
+                        <p class="letter-paragraph">
+                            Ya se lo que estas pensando... "este man esta loco". Y si, probablemente. Nos conocimos 
+                            por una app, entre miles de fotos filtradas y bios que nadie lee, y de alguna forma 
+                            tu perfil me hizo parar de scrollear como idiota.
+                        </p>
+                        <p class="letter-paragraph">
+                            No se como explicarlo pero me caes demasiado bien. Como que hablar contigo no se siente 
+                            forzado, sabes? Me gusta tu vibra, como te expresas, hasta cuando te pones dificil. 
+                            Y bueno, es San Valentin y aparte del granizado te quise hacer esto tambien porque 
+                            no iba a mandarte solo un sticker generico como todos los demas.
+                        </p>
+                        <p class="letter-paragraph">
+                            Asi que si... te hice esta pagina a las 3am en vez de dormir. Espero que al menos 
+                            te saque una sonrisa. O minimo un "ay este man" con cariño jajaja.
+                        </p>
+                        <p class="letter-signature">- tu bebesito bebelin</p>
+                    </div>
+                    <div class="letter-corner tl"></div>
+                    <div class="letter-corner tr"></div>
+                    <div class="letter-corner bl"></div>
+                    <div class="letter-corner br"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COSAS QUE ME GUSTAN -->
+        <section class="reasons-section" id="reasons-section">
+            <h2 class="section-title fade-in-up">Cosas que me gustan de ti</h2>
+            <p class="section-subtitle fade-in-up">...y solo te conozco por chat, imaginate cuando te vea en persona</p>
+            <div class="reasons-carousel">
+                <div class="reason-card glass-card fade-in-up" style="--delay: 0.1s">
+                    <div class="reason-number">1</div>
+                    <div class="reason-icon">&#128172;</div>
+                    <p>Puedo hablar contigo de todo y no me aburro nunca</p>
+                </div>
+                <div class="reason-card glass-card fade-in-up" style="--delay: 0.2s">
+                    <div class="reason-number">2</div>
+                    <div class="reason-icon">&#128514;</div>
+                    <p>Tus respuestas me sacan carcajadas de la nada</p>
+                </div>
+                <div class="reason-card glass-card fade-in-up" style="--delay: 0.3s">
+                    <div class="reason-number">3</div>
+                    <div class="reason-icon">&#129300;</div>
+                    <p>Eres misteriosa y eso me tiene enganchado</p>
+                </div>
+                <div class="reason-card glass-card fade-in-up" style="--delay: 0.4s">
+                    <div class="reason-number">4</div>
+                    <div class="reason-icon">&#128241;</div>
+                    <p>Tus audios >>>> cualquier podcast</p>
+                </div>
+                <div class="reason-card glass-card fade-in-up" style="--delay: 0.5s">
+                    <div class="reason-number">5</div>
+                    <div class="reason-icon">&#128064;</div>
+                    <p>Te haces la dura pero se que te caigo bien jaja</p>
+                </div>
+                <div class="reason-card glass-card fade-in-up" style="--delay: 0.6s">
+                    <div class="reason-number">6</div>
+                    <div class="reason-icon">&#10024;</div>
+                    <p>Tienes algo que las demas no tienen, no se que pero lo tienes</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONFESIONES -->
+        <section class="confessions-section" id="confessions-section">
+            <h2 class="section-title fade-in-up">Confesiones</h2>
+            <p class="section-subtitle fade-in-up">cosas que no te he dicho... hasta ahora</p>
+            <div class="confessions-container">
+                <div class="confession-item fade-in-up" style="--delay: 0.1s">
+                    <div class="confession-icon">&#128580;</div>
+                    <p>Vuelvo a leer nuestros chats cuando me aburro... o cuando te extraño</p>
+                </div>
+                <div class="confession-item fade-in-up" style="--delay: 0.3s">
+                    <div class="confession-icon">&#128247;</div>
+                    <p>Tu foto de perfil me detuvo el scroll. No pude seguir hasta darte like jaja</p>
+                </div>
+                <div class="confession-item fade-in-up" style="--delay: 0.5s">
+                    <div class="confession-icon">&#128556;</div>
+                    <p>Cuando demoras en responder me quedo mirando el "en linea" como perdedor</p>
+                </div>
+                <div class="confession-item fade-in-up" style="--delay: 0.7s">
+                    <div class="confession-icon">&#129396;</div>
+                    <p>Tengo ganas de conocerte en persona pero tambien cague de miedo</p>
+                </div>
+                <div class="confession-item fade-in-up" style="--delay: 0.9s">
+                    <div class="confession-icon">&#128165;</div>
+                    <p>A veces pienso en que decirte antes de dormir solo para tener excusa de hablarte</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPATIBILIDAD -->
+        <section class="compatibility-section" id="compatibility-section">
+            <h2 class="section-title fade-in-up">Nivel de compatibilidad</h2>
+            <p class="section-subtitle fade-in-up">segun mis calculos cientificos (nada cientificos)</p>
+            <div class="compatibility-container glass-card fade-in-up">
+                <div class="compatibility-meter">
+                    <div class="compatibility-fill" id="compatibility-fill"></div>
+                    <div class="compatibility-percentage" id="compatibility-percentage">0%</div>
+                </div>
+                <p class="compatibility-verdict" id="compatibility-verdict">Calculando...</p>
+                <div class="compatibility-reasons">
+                    <div class="compat-reason">&#10004; Misma app de citas</div>
+                    <div class="compat-reason">&#10004; Conversaciones que fluyen</div>
+                    <div class="compat-reason">&#10004; Ella es misteriosa, yo soy persistente</div>
+                    <div class="compat-reason">&#10004; Ambos despiertos a las 3am</div>
+                    <div class="compat-reason">&#10004; Le gusta Star Shopping (punto clave)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SI O NO GAME -->
+        <section class="sino-section" id="sino-section">
+            <h2 class="section-title fade-in-up">Juego rapido: Si o No</h2>
+            <p class="section-subtitle fade-in-up">responde con el corazon (toca una opcion)</p>
+            <div class="sino-container" id="sino-container">
+                <div class="sino-question glass-card fade-in-up" data-answer="si">
+                    <p class="sino-q-text">Te gustaria conocerme en persona?</p>
+                    <div class="sino-btns">
+                        <button class="sino-btn sino-si" data-value="si">Si &#128525;</button>
+                        <button class="sino-btn sino-no" data-value="no">No &#128528;</button>
+                    </div>
+                    <p class="sino-result"></p>
+                </div>
+                <div class="sino-question glass-card fade-in-up" data-answer="si">
+                    <p class="sino-q-text">Crees que nos llevaremos bien en vivo?</p>
+                    <div class="sino-btns">
+                        <button class="sino-btn sino-si" data-value="si">Si &#128519;</button>
+                        <button class="sino-btn sino-no" data-value="no">No &#129322;</button>
+                    </div>
+                    <p class="sino-result"></p>
+                </div>
+                <div class="sino-question glass-card fade-in-up" data-answer="si">
+                    <p class="sino-q-text">Te parecio tierna esta pagina?</p>
+                    <div class="sino-btns">
+                        <button class="sino-btn sino-si" data-value="si">Si &#129392;</button>
+                        <button class="sino-btn sino-no" data-value="no">Ni ahi &#128514;</button>
+                    </div>
+                    <p class="sino-result"></p>
+                </div>
+                <div class="sino-question glass-card fade-in-up" data-answer="si">
+                    <p class="sino-q-text">Te caigo bien? (se honesta jaja)</p>
+                    <div class="sino-btns">
+                        <button class="sino-btn sino-si" data-value="si">Si &#128526;</button>
+                        <button class="sino-btn sino-no" data-value="no">Meh &#129335;</button>
+                    </div>
+                    <p class="sino-result"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LO QUE HARIA -->
+        <section class="would-do-section" id="would-do-section">
+            <h2 class="section-title fade-in-up">Lo que haria si estuvieras aqui</h2>
+            <p class="section-subtitle fade-in-up">solo imaginando por ahora...</p>
+            <div class="would-do-grid">
+                <div class="would-card glass-card fade-in-up" style="--delay: 0.1s">
+                    <div class="would-icon">&#9749;</div>
+                    <p class="would-title">Cafe a medianoche</p>
+                    <p class="would-desc">Ir a un cafe 24h a platicar hasta que nos corran o hasta que salga el sol</p>
+                </div>
+                <div class="would-card glass-card fade-in-up" style="--delay: 0.2s">
+                    <div class="would-icon">&#127911;</div>
+                    <p class="would-title">Escuchar Star Shopping</p>
+                    <p class="would-desc">Ponernos audifonos los dos y solo vibrar con la cancion sin decir nada</p>
+                </div>
+                <div class="would-card glass-card fade-in-up" style="--delay: 0.3s">
+                    <div class="would-icon">&#128506;</div>
+                    <p class="would-title">Caminar sin rumbo</p>
+                    <p class="would-desc">Salir a caminar de noche hablando de todo y de nada solo por estar juntos</p>
+                </div>
+                <div class="would-card glass-card fade-in-up" style="--delay: 0.4s">
+                    <div class="would-icon">&#127775;</div>
+                    <p class="would-title">Ver las estrellas</p>
+                    <p class="would-desc">Buscar un lugar oscuro lejos de la ciudad y quedarnos viendo el cielo callados</p>
+                </div>
+                <div class="would-card glass-card fade-in-up" style="--delay: 0.5s">
+                    <div class="would-icon">&#128247;</div>
+                    <p class="would-title">Tomarte fotos</p>
+                    <p class="would-desc">Hacerte fotitos aesthetic aunque salgas enojada porque soy fastidioso jajaja</p>
+                </div>
+                <div class="would-card glass-card fade-in-up" style="--delay: 0.6s">
+                    <div class="would-icon">&#128150;</div>
+                    <p class="would-title">Lo que tu quieras</p>
+                    <p class="would-desc">En serio. Solo estar contigo ya seria suficiente para mi</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- STAR SHOPPING -->
+        <section class="star-shopping-section" id="star-shopping-section">
+            <div class="star-shopping-header fade-in-up">
+                <span class="music-note">&#127925;</span>
+                <h2 class="section-title">Star Shopping</h2>
+                <p class="section-subtitle">tu cancion favorita... y ahora tambien la mia</p>
+                <span class="song-ref">Lil Peep - Star Shopping</span>
+            </div>
+            <div class="star-shopping-cards">
+                <div class="star-card fade-in-up" style="--delay: 0.1s">
+                    <span class="star-card-stars">&#10022; &#10022; &#10022;</span>
+                    <p class="star-card-lyric">"Look at the sky tonight, all of the stars have a reason"</p>
+                    <p class="star-card-message">Si las estrellas tienen razon de existir... capaz la mia es haberte encontrado scrolleando a las 2am con sueño</p>
+                </div>
+                <div class="star-card fade-in-up" style="--delay: 0.25s">
+                    <span class="star-card-stars">&#10022; &#10022; &#10022;</span>
+                    <p class="star-card-lyric">"I could take you there"</p>
+                    <p class="star-card-message">Cuando nos veamos te llevo a donde quieras. Bueno primero un cafe porque soy timido. Despues a donde sea jaja</p>
+                </div>
+                <div class="star-card fade-in-up" style="--delay: 0.4s">
+                    <span class="star-card-stars">&#10022; &#10022; &#10022;</span>
+                    <p class="star-card-lyric">"Wait for me, I'll be coming back for you"</p>
+                    <p class="star-card-message">Todavia no nos conocemos en persona pero ya te estoy esperando. Suena cursi pero es verdad lol</p>
+                </div>
+                <div class="star-card fade-in-up" style="--delay: 0.55s">
+                    <span class="star-card-stars">&#10022; &#10022; &#10022;</span>
+                    <p class="star-card-lyric">"I'd give you the stars if you'd want them"</p>
+                    <p class="star-card-message">No te puedo dar las estrellas pero te hice esta web completa a las 3am con Star Shopping en repeat. Eso cuenta no?</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FRASES -->
+        <section class="quotes-section" id="quotes-section">
+            <h2 class="section-title fade-in-up">Cosas que pienso</h2>
+            <div class="quotes-slider" id="quotes-slider">
+                <div class="quote-card glass-card active">
+                    <p class="quote-text">"No se como explicarlo pero hablar contigo se siente facil. Y eso no pasa seguido."</p>
+                </div>
+                <div class="quote-card glass-card">
+                    <p class="quote-text">"De toda la gente en esa app me alegra haber deslizado a la derecha justo en tu perfil."</p>
+                </div>
+                <div class="quote-card glass-card">
+                    <p class="quote-text">"Todavia no nos conocemos en persona pero ya quiero saber como se siente estar cerca tuyo."</p>
+                </div>
+                <div class="quote-card glass-card">
+                    <p class="quote-text">"Te haces la mala pero yo se que eres tierna. Y eso me gusta mas de lo que deberia admitir."</p>
+                </div>
+                <div class="quote-card glass-card">
+                    <p class="quote-text">"Algun dia vamos a recordar esto y vamos a decir: todo empezo con un match random."</p>
+                </div>
+            </div>
+            <div class="quotes-dots" id="quotes-dots"></div>
+        </section>
+
+        <!-- EMOJIS -->
+        <section class="emoji-section" id="emoji-section">
+            <h2 class="section-title fade-in-up">Yo cuando me contestas</h2>
+            <div class="emoji-grid fade-in-up">
+                <div class="emoji-item" data-tooltip="Real">
+                    <span>&#128516;</span>
+                </div>
+                <div class="emoji-item" data-tooltip="Cuando tardas">
+                    <span>&#128553;</span>
+                </div>
+                <div class="emoji-item" data-tooltip="Tu visto">
+                    <span>&#128565;</span>
+                </div>
+                <div class="emoji-item" data-tooltip="Cuando mandas foto">
+                    <span>&#129396;</span>
+                </div>
+                <div class="emoji-item" data-tooltip="Tu risa">
+                    <span>&#128525;</span>
+                </div>
+                <div class="emoji-item" data-tooltip="Nervios">
+                    <span>&#129303;</span>
+                </div>
+                <div class="emoji-item" data-tooltip="Cuando te enojas">
+                    <span>&#128517;</span>
+                </div>
+                <div class="emoji-item" data-tooltip="Hablando contigo">
+                    <span>&#129321;</span>
+                </div>
+                <div class="emoji-item" data-tooltip="El match">
+                    <span>&#127881;</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- COUNTER -->
+        <section class="heartbeat-section" id="heartbeat-section">
+            <div class="heartbeat-content fade-in-up">
+                <h2 class="section-title">Veces que he revisado si me contestaste</h2>
+                <div class="heartbeat-display">
+                    <div class="heartbeat-icon" id="heartbeat-icon">&#128241;</div>
+                    <div class="heartbeat-counter">
+                        <span class="counter-number" id="heartbeat-count">0</span>
+                        <span class="counter-label">...y contando</span>
+                    </div>
+                </div>
+                <div class="heartbeat-line">
+                    <svg viewBox="0 0 600 100" class="ecg-line">
+                        <polyline class="ecg-path" points="0,50 100,50 120,50 140,20 160,80 180,10 200,90 220,50 240,50 340,50 360,50 380,20 400,80 420,10 440,90 460,50 480,50 600,50" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- LA PREGUNTA -->
+        <section class="question-section" id="question-section">
+            <div class="question-bg-effect"></div>
+            <div class="question-container glass-card fade-in-up">
+                <h2 class="question-title">Marianita...</h2>
+                <p class="question-text">&#191;Quieres ser mi San Valentin? &#128140;</p>
+                <p class="question-disclaimer">(aunque sea a distancia, por ahora)</p>
+                <div class="buttons-container">
+                    <button class="btn btn-yes" id="btn-yes">Dale que si &#128149;</button>
+                    <button class="btn btn-no" id="btn-no">Nah &#128528;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESPUESTA SI -->
+        <section class="answer-section hidden" id="yes-section">
+            <div class="answer-container">
+                <div class="confetti-container" id="confetti-container"></div>
+                <h2 class="answer-title">Lo sabia &#128526;</h2>
+                <div class="answer-hearts-ring">
+                    <div class="big-heart" id="big-heart">&#128149;</div>
+                </div>
+                <p class="answer-message">
+                    Sabia que ibas a decir que si. O bueno, tenia fe jajaja.
+                </p>
+                <p class="answer-message delay-1">
+                    Ahora solo falta que nos veamos en persona y confirmar que la quimica es la misma en vivo.
+                </p>
+                <p class="answer-message delay-2">
+                    Feliz San Valentin, Marianita. Esto recien empieza...
+                </p>
+                <div class="answer-emojis">
+                    <span>&#128149;</span><span>&#128293;</span><span>&#128526;</span><span>&#128293;</span><span>&#128149;</span>
+                </div>
+                
+                <!-- CAJA DE MENSAJE -->
+                <div class="message-box-container" id="message-box-container">
+                    <h3 class="message-box-title">Cuentame que piensas... &#128172;&#128149;</h3>
+                    <p class="message-box-subtitle">escribeme lo que quieras, llegara directo a mi</p>
+                    <form class="message-form" id="message-form">
+                        <textarea 
+                            class="message-textarea" 
+                            id="message-textarea"
+                            name="message"
+                            placeholder="Escribe aqui lo que quieras decirme..."
+                            rows="6"
+                            required
+                        ></textarea>
+                        <button type="submit" class="message-submit-btn" id="message-submit-btn">
+                            Enviar mensaje 💌
+                        </button>
+                        <p class="message-status" id="message-status"></p>
+                    </form>
+                </div>
+                
+                <div id="fireworks-container"></div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p>Hecho a las 3am con agua, Star Shopping y ganas de impresionarte</p>
+            <p class="footer-signature">- tu bebesito bebelin</p>
+            <p class="footer-date">San Valentin 2026</p>
+        </footer>
+    </div>
+
+    <!-- Audio -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="Lil Peep - Star Shopping Official Audio.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="music-toggle" class="music-btn hidden" title="Musica">
+        &#127925;
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
