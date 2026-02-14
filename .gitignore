@@ -1,4 +1,8 @@
+node_modules/
+*.log
+.env
 *.txt
 *.bat
 *.py
 test*.html
+sanvalentin.zip

@@ -1,0 +1,15 @@
+{
+  "name": "san-valentin-marianita",
+  "version": "1.0.0",
+  "description": "Página de San Valentín para Marianita",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["valentine", "romantic", "web"],
+  "author": "Jose",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
