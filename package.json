@@ -4,7 +4,8 @@
   "description": "Página de San Valentín para Marianita",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "echo 'No build needed'"
   },
   "keywords": ["valentine", "romantic", "web"],
   "author": "Jose",
